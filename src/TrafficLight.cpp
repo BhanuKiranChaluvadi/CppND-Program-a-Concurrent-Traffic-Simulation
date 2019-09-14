@@ -55,7 +55,7 @@ void TrafficLight::waitForGreen()
         TrafficLightPhase trafficLightPhase = _messagequeue.receive();
         if (trafficLightPhase == TrafficLightPhase::green) 
         {
-            // TODO
+            // TODO: 
             return;
         }
     }
@@ -80,8 +80,12 @@ void TrafficLight::cycleThroughPhases()
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
 
-    // initalize variables
-    double cycleDuration = 5000; // duration of a single simulation cycle in ms
+    // initialize random seed
+    std::random_device rd;
+    std::mt19937 eng(rd());
+    std::uniform_int_distribution<> distr(4000, 6000);
+    double cycleDuration = distr(eng);
+
     std::chrono::time_point<std::chrono::system_clock> lastUpdate;
     
     // init stop watch
