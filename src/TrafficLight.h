@@ -38,6 +38,7 @@ private:
 // can be either „red“ or „green“. Also, add the private method „void cycleThroughPhases()“. 
 // Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value. 
 
+
 class TrafficLight : public TrafficObject, public std::enable_shared_from_this<TrafficLight>
 {
 public:
@@ -46,8 +47,6 @@ public:
 
     void waitForGreen();
     void simulate();
-
-
 
     // getters / setters
     TrafficLightPhase  getCurrentPhase();

@@ -69,6 +69,7 @@ TrafficLightPhase TrafficLight::getCurrentPhase()
 void TrafficLight::simulate()
 {
     // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
+    threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
 }
 
 // virtual function which is executed in a thread
@@ -101,7 +102,7 @@ void TrafficLight::cycleThroughPhases()
             else
                 _currentPhase = TrafficLightPhase::red;
 
-            // send an update method to the message queue usinf move semantic
+            // send an update method to the message queue using move semantic
             _messagequeue.send(std::move(_currentPhase));
             
             // reset stop watch for next cycle
